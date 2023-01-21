@@ -56,7 +56,7 @@ public class LoadingScreen extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\T32.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Logo1.png")); // NOI18N
         jLabel3.setText("<html>GO!<br/>Trafy</html>");
         jLabel3.setAlignmentY(0.2F);
         jLabel3.setIconTextGap(2);
@@ -64,7 +64,7 @@ public class LoadingScreen extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 22)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 22)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(93, 176, 135));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SISTEMA DE GESTIÓN DE INVENTARIO");
@@ -75,9 +75,9 @@ public class LoadingScreen extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
