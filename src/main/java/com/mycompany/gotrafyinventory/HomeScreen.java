@@ -4,6 +4,9 @@
  */
 package com.mycompany.gotrafyinventory;
 
+import java.io.File;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author luisa
@@ -13,10 +16,48 @@ public class HomeScreen extends javax.swing.JFrame {
     /**
      * Creates new form HomeScreen
      */
+    public void CloseFrame(){
+        super.dispose();
+    }
     public HomeScreen() {
         initComponents();
     }
-
+    public void selectLabel(int a)
+    {
+        jLabelCategory.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelProduct.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelOrder.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelUser.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelCustomer.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelCategory.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Category2.png"));
+        jLabelProduct.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Product2.png"));
+        jLabelOrder.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Order2.png"));
+        jLabelUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\User2.png"));
+        jLabelCustomer.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Clients2.png"));
+        switch(a)
+        {
+            case 1:
+                jLabelProduct.setForeground(new java.awt.Color(110, 173, 132));
+                jLabelProduct.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Product.png"));
+                break;
+            case 2:
+                jLabelCategory.setForeground(new java.awt.Color(110, 173, 132));
+                jLabelCategory.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Category.png"));
+                break;
+            case 3:
+                jLabelOrder.setForeground(new java.awt.Color(110, 173, 132));
+                jLabelOrder.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Order.png"));
+                break;
+            case 4:
+                jLabelCustomer.setForeground(new java.awt.Color(110, 173, 132));
+                jLabelCustomer.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Clients.png"));
+                break;
+            case 5:
+                jLabelUser.setForeground(new java.awt.Color(110, 173, 132));
+                jLabelUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\User.png"));
+                break;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,14 +71,17 @@ public class HomeScreen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabelLogo = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jLabelCross = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabelCategory = new javax.swing.JLabel();
         jLabelProduct = new javax.swing.JLabel();
         jLabelUser = new javax.swing.JLabel();
         jLabelOrder = new javax.swing.JLabel();
-        jLabelClient = new javax.swing.JLabel();
+        jLabelCustomer = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jPanel4 = new javax.swing.JPanel();
 
         jLabel2.setText("jLabel2");
 
@@ -49,11 +93,13 @@ public class HomeScreen extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("SISTEMA DE GESTIÓN DE INVENTARIO");
+        jLabel1.setText("GESTIÓN DE INVENTARIO");
 
         jLabelLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Logo2.png")); // NOI18N
 
-        jLabelCross.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(52, 99, 76));
+
+        jLabelCross.setFont(new java.awt.Font("OCR A Extended", 0, 30)); // NOI18N
         jLabelCross.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCross.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCross.setText("x");
@@ -62,6 +108,22 @@ public class HomeScreen extends javax.swing.JFrame {
                 jLabelCrossMouseClicked(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addComponent(jLabelCross, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabelCross, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,8 +134,8 @@ public class HomeScreen extends javax.swing.JFrame {
                 .addComponent(jLabelLogo)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelCross, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,7 +148,7 @@ public class HomeScreen extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabelCross, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -97,8 +159,13 @@ public class HomeScreen extends javax.swing.JFrame {
         jLabelCategory.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Category2.png")); // NOI18N
         jLabelCategory.setText("Categorias");
         jLabelCategory.setIconTextGap(10);
+        jLabelCategory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCategoryMouseClicked(evt);
+            }
+        });
 
-        jLabelProduct.setBackground(new java.awt.Color(93, 176, 135));
+        jLabelProduct.setBackground(new java.awt.Color(255, 255, 255));
         jLabelProduct.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabelProduct.setForeground(new java.awt.Color(110, 173, 132));
         jLabelProduct.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Product.png")); // NOI18N
@@ -115,18 +182,38 @@ public class HomeScreen extends javax.swing.JFrame {
         jLabelUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\User2.png")); // NOI18N
         jLabelUser.setText("Usuarios");
         jLabelUser.setIconTextGap(10);
+        jLabelUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelUserMouseClicked(evt);
+            }
+        });
 
         jLabelOrder.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabelOrder.setForeground(new java.awt.Color(102, 102, 102));
         jLabelOrder.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Order2.png")); // NOI18N
-        jLabelOrder.setText("Ordenes");
+        jLabelOrder.setText("Pedidos");
         jLabelOrder.setIconTextGap(10);
+        jLabelOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelOrderMouseClicked(evt);
+            }
+        });
 
-        jLabelClient.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jLabelClient.setForeground(new java.awt.Color(102, 102, 102));
-        jLabelClient.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Clients2.png")); // NOI18N
-        jLabelClient.setText("Clientes");
-        jLabelClient.setIconTextGap(10);
+        jLabelCustomer.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabelCustomer.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelCustomer.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaSnake\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Clients2.png")); // NOI18N
+        jLabelCustomer.setText("Clientes");
+        jLabelCustomer.setIconTextGap(10);
+        jLabelCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCustomerMouseClicked(evt);
+            }
+        });
+
+        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel3.setText("Cerrar sesión");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -136,40 +223,61 @@ public class HomeScreen extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelUser, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabelProduct)
-                        .addComponent(jLabelCategory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelClient, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabelCategory))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel3)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabelProduct)
+                            .addComponent(jLabelOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelCustomer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(24, 24, 24)
                 .addComponent(jLabelProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(31, 31, 31)
                 .addComponent(jLabelCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(29, 29, 29)
                 .addComponent(jLabelOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(jLabelClient, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(30, 30, 30)
+                .addComponent(jLabelCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(jLabelUser, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(19, 19, 19))
         );
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 610, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 430, Short.MAX_VALUE)
+        );
+
+        jDesktopPane1.setLayer(jPanel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,13 +305,33 @@ public class HomeScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelCrossMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCrossMouseClicked
-        
+        CloseFrame();
     }//GEN-LAST:event_jLabelCrossMouseClicked
 
     private void jLabelProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelProductMouseClicked
-        Products pr = new Products();
-        jDesktopPane1.add(pr).setVisible(true);
+        jDesktopPane1.add(new Products()).setVisible(true);
+        selectLabel(1);
     }//GEN-LAST:event_jLabelProductMouseClicked
+
+    private void jLabelCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCategoryMouseClicked
+        jDesktopPane1.add(new Category()).setVisible(true);
+        selectLabel(2);
+    }//GEN-LAST:event_jLabelCategoryMouseClicked
+
+    private void jLabelOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelOrderMouseClicked
+        jDesktopPane1.add(new Orders()).setVisible(true);
+        selectLabel(3);
+    }//GEN-LAST:event_jLabelOrderMouseClicked
+
+    private void jLabelCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCustomerMouseClicked
+        jDesktopPane1.add(new Customer()).setVisible(true);
+        selectLabel(4);
+    }//GEN-LAST:event_jLabelCustomerMouseClicked
+
+    private void jLabelUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUserMouseClicked
+        jDesktopPane1.add(new User()).setVisible(true);
+        selectLabel(5);
+    }//GEN-LAST:event_jLabelUserMouseClicked
 
     /**
      * @param args the command line arguments
@@ -244,14 +372,17 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelCategory;
-    private javax.swing.JLabel jLabelClient;
     private javax.swing.JLabel jLabelCross;
+    private javax.swing.JLabel jLabelCustomer;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelOrder;
     private javax.swing.JLabel jLabelProduct;
     private javax.swing.JLabel jLabelUser;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

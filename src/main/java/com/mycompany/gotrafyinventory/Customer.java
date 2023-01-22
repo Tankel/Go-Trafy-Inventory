@@ -10,12 +10,12 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  *
  * @author luisa
  */
-public class Products extends javax.swing.JInternalFrame {
+public class Customer extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Product
      */
-    public Products() {
+    public Customer() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
@@ -31,8 +31,11 @@ public class Products extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        products1 = new com.mycompany.gotrafyinventory.Products();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+
+        products1.setVisible(true);
 
         setBorder(null);
 
@@ -42,7 +45,7 @@ public class Products extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(110, 174, 133));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("GESTIÓN DE PRODUCTOS");
+        jLabel1.setText("CLIENTES");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -78,5 +81,6 @@ public class Products extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private com.mycompany.gotrafyinventory.Products products1;
     // End of variables declaration//GEN-END:variables
 }

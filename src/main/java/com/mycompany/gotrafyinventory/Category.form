@@ -45,7 +45,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" pref="614" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="611" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -73,7 +73,7 @@
               <Color blue="85" green="ae" red="6e" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="GESTI&#xd3;N DE PRODUCTOS"/>
+            <Property name="text" type="java.lang.String" value="CATEGORIAS"/>
           </Properties>
         </Component>
       </SubComponents>

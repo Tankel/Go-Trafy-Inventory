@@ -10,12 +10,12 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  *
  * @author luisa
  */
-public class Products extends javax.swing.JInternalFrame {
+public class Category extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Product
      */
-    public Products() {
+    public Category() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
@@ -42,14 +42,14 @@ public class Products extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(110, 174, 133));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("GESTIÓN DE PRODUCTOS");
+        jLabel1.setText("CATEGORIAS");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
