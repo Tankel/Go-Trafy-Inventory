@@ -4,6 +4,21 @@
     <groupId>com.mycompany.gotrafyinventory</groupId>
     <artifactId>GoTrafyInventory</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <dependencies>
+        <!--
+        <dependency>
+            <groupId>org.eclipse.birt.runtime.3_7_1</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.5.1000001</version>
+        </dependency>
+        -->
+        <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.31</version>
+        </dependency>
+    </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
