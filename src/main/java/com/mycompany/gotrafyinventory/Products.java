@@ -8,13 +8,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-import java.beans.Statement;
+import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -30,6 +32,7 @@ public class Products extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
+        updateProdTable();
     }
 
     Connection Con = null;
@@ -52,22 +55,22 @@ public class Products extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        proId = new javax.swing.JTextField();
+        prodId = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        proQty = new javax.swing.JTextField();
+        prodQty = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         proCat = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        products = new javax.swing.JTable();
+        prodTable = new javax.swing.JTable();
         addBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         editBtn = new javax.swing.JButton();
-        proDes = new javax.swing.JTextField();
-        proName = new javax.swing.JTextField();
+        prodDes = new javax.swing.JTextField();
+        prodName = new javax.swing.JTextField();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
 
         jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -215,9 +218,9 @@ public class Products extends javax.swing.JInternalFrame {
         jSeparator1.setBackground(new java.awt.Color(255, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(110, 174, 133));
 
-        proId.setBackground(new java.awt.Color(255, 255, 255));
-        proId.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
-        proId.setForeground(new java.awt.Color(51, 51, 51));
+        prodId.setBackground(new java.awt.Color(255, 255, 255));
+        prodId.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
+        prodId.setForeground(new java.awt.Color(51, 51, 51));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -251,9 +254,9 @@ public class Products extends javax.swing.JInternalFrame {
         jLabel8.setFocusable(false);
         jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        proQty.setBackground(new java.awt.Color(255, 255, 255));
-        proQty.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
-        proQty.setForeground(new java.awt.Color(51, 51, 51));
+        prodQty.setBackground(new java.awt.Color(255, 255, 255));
+        prodQty.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
+        prodQty.setForeground(new java.awt.Color(51, 51, 51));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
@@ -269,10 +272,10 @@ public class Products extends javax.swing.JInternalFrame {
         proCat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         proCat.setPreferredSize(new java.awt.Dimension(64, 26));
 
-        products.setBackground(new java.awt.Color(255, 255, 255));
-        products.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        products.setForeground(new java.awt.Color(51, 51, 51));
-        products.setModel(new javax.swing.table.DefaultTableModel(
+        prodTable.setBackground(new java.awt.Color(255, 255, 255));
+        prodTable.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        prodTable.setForeground(new java.awt.Color(51, 51, 51));
+        prodTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -280,11 +283,16 @@ public class Products extends javax.swing.JInternalFrame {
                 "ID", "NOMBRE", "CANTIDAD", "DESCRIPCIÓN", "CATEGORÍA"
             }
         ));
-        products.setSelectionBackground(new java.awt.Color(110, 174, 133));
-        products.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        products.getTableHeader().setResizingAllowed(false);
-        products.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(products);
+        prodTable.setSelectionBackground(new java.awt.Color(110, 174, 133));
+        prodTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        prodTable.getTableHeader().setResizingAllowed(false);
+        prodTable.getTableHeader().setReorderingAllowed(false);
+        prodTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                prodTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(prodTable);
 
         addBtn.setBackground(new java.awt.Color(204, 204, 204));
         addBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
@@ -296,11 +304,6 @@ public class Products extends javax.swing.JInternalFrame {
                 addBtnMouseClicked(evt);
             }
         });
-        addBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtnActionPerformed(evt);
-            }
-        });
 
         deleteBtn.setBackground(new java.awt.Color(255, 153, 153));
         deleteBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
@@ -310,9 +313,9 @@ public class Products extends javax.swing.JInternalFrame {
         deleteBtn.setMaximumSize(new java.awt.Dimension(51, 26));
         deleteBtn.setMinimumSize(new java.awt.Dimension(51, 26));
         deleteBtn.setPreferredSize(new java.awt.Dimension(51, 26));
-        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteBtnActionPerformed(evt);
+        deleteBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteBtnMouseClicked(evt);
             }
         });
 
@@ -324,19 +327,19 @@ public class Products extends javax.swing.JInternalFrame {
         editBtn.setText("Editar");
         editBtn.setBorder(null);
         editBtn.setPreferredSize(new java.awt.Dimension(36, 26));
-        editBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtnActionPerformed(evt);
+        editBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editBtnMouseClicked(evt);
             }
         });
 
-        proDes.setBackground(new java.awt.Color(255, 255, 255));
-        proDes.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
-        proDes.setForeground(new java.awt.Color(51, 51, 51));
+        prodDes.setBackground(new java.awt.Color(255, 255, 255));
+        prodDes.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
+        prodDes.setForeground(new java.awt.Color(51, 51, 51));
 
-        proName.setBackground(new java.awt.Color(255, 255, 255));
-        proName.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
-        proName.setForeground(new java.awt.Color(51, 51, 51));
+        prodName.setBackground(new java.awt.Color(255, 255, 255));
+        prodName.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
+        prodName.setForeground(new java.awt.Color(51, 51, 51));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -360,11 +363,11 @@ public class Products extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(proQty)
-                                    .addComponent(proId)
+                                    .addComponent(prodQty)
+                                    .addComponent(prodId)
                                     .addComponent(proCat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(proDes)
-                                    .addComponent(proName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(prodDes)
+                                    .addComponent(prodName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -392,19 +395,19 @@ public class Products extends javax.swing.JInternalFrame {
                                 .addGap(19, 19, 19)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5)
-                                    .addComponent(proId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(prodId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel6)
-                                    .addComponent(proName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(prodName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel8)
-                                    .addComponent(proQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(prodQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel7)
-                                    .addComponent(proDes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(prodDes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -440,19 +443,23 @@ public class Products extends javax.swing.JInternalFrame {
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
 
     }//GEN-LAST:event_jPasswordField1ActionPerformed
-
-    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addBtnActionPerformed
-
-    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteBtnActionPerformed
-
-    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editBtnActionPerformed
-
+    
+    public void updateProdTable()
+    {
+        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
+        String user = "root";
+        String ps = "cOCOROLOCO22";
+        try {
+            Con = DriverManager.getConnection(url, user, ps);
+            St = Con.createStatement();
+            Rs = St.executeQuery("select * from products");
+            prodTable.setModel(DbUtils.resultSetToTableModel(Rs));
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    //AGREGAR
     private void addBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtnMouseClicked
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
@@ -467,15 +474,16 @@ public class Products extends javax.swing.JInternalFrame {
             //Con = DriverManager.getConnection("jdbc:derby://localhost:1527/InventoryDB","Luis","Cocoroloco22");
             String sql = "Insert into products (id, name, quantity, description, category)" + "values (?, ?, ? , ?, ?)";
             PreparedStatement add = Con.prepareStatement(sql);
-            add.setInt(1, Integer.valueOf(proId.getText()));
-            add.setString(2,proName.getText());
-            add.setInt(3, Integer.valueOf(proQty.getText()));
-            add.setString(4, proDes.getText());
+            add.setInt(1, Integer.valueOf(prodId.getText()));
+            add.setString(2,prodName.getText());
+            add.setInt(3, Integer.valueOf(prodQty.getText()));
+            add.setString(4, prodDes.getText());
             add.setString(5,proCat.getSelectedItem().toString());
             //int row =add.executeUpdate();
             add.execute();
             Con.close();
             JOptionPane.showMessageDialog(this, "Producto añadido correctamente");
+            updateProdTable();
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -485,6 +493,70 @@ public class Products extends javax.swing.JInternalFrame {
             //Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_addBtnMouseClicked
+    
+    //ELIMINAR
+    private void deleteBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBtnMouseClicked
+        if(prodId.getText().isEmpty())
+            JOptionPane.showMessageDialog(this, "Seleccione un producto");
+        else
+        {
+            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
+            String user = "root";
+            String ps = "cOCOROLOCO22";
+            try {
+                Con = DriverManager.getConnection(url, user, ps);
+                Statement Add = Con.createStatement();
+                Rs = Add.executeQuery("select * from products where id="+prodId.getText());
+                if(Rs.next())
+                {
+                    Add.executeUpdate("Delete from products where id="+prodId.getText());
+                    updateProdTable(); 
+                    JOptionPane.showMessageDialog(this, "Producto eliminado correctamente");
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "ID del producto no encontrado");
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+            } 
+        }
+    }//GEN-LAST:event_deleteBtnMouseClicked
+    
+    //SELECCIONAR
+    private void prodTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prodTableMouseClicked
+        DefaultTableModel model =  (DefaultTableModel) prodTable.getModel();
+        int row = prodTable.getSelectedRow();
+        prodId.setText(model.getValueAt (row, 0).toString());
+        prodName.setText(model.getValueAt (row, 1).toString());
+        prodQty.setText(model.getValueAt (row, 2).toString());
+        prodDes.setText(model.getValueAt (row, 3).toString());
+    }//GEN-LAST:event_prodTableMouseClicked
+
+    //EDITAR
+    private void editBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBtnMouseClicked
+        if(prodId.getText().isEmpty() || prodName.getText().isEmpty() || prodQty.getText().isEmpty() || prodDes.getText().isEmpty())
+            JOptionPane.showMessageDialog(this, "Falta Información");
+        else
+        {
+            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
+            String user = "root";
+            String ps = "cOCOROLOCO22";
+            try {
+                Con = DriverManager.getConnection(url, user, ps);
+                Statement Add = Con.createStatement();
+                Rs = Add.executeQuery("select * from products where id="+prodId.getText());
+                if(Rs.next())
+                {
+                    Add.executeUpdate("update products set NAME='"+prodName.getText()+"', QUANTITY='"+prodQty.getText()+"', DESCRIPTION='"+prodDes.getText()+"', CATEGORY='"+proCat.getSelectedItem().toString()+"' where ID="+prodId.getText());
+                    updateProdTable(); 
+                    JOptionPane.showMessageDialog(this, "Producto modificado correctamente");
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "ID del producto no encontrado.\nEl ID no puede ser modificado."); 
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_editBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -513,10 +585,10 @@ public class Products extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JComboBox<String> proCat;
-    private javax.swing.JTextField proDes;
-    private javax.swing.JTextField proId;
-    private javax.swing.JTextField proName;
-    private javax.swing.JTextField proQty;
-    private javax.swing.JTable products;
+    private javax.swing.JTextField prodDes;
+    private javax.swing.JTextField prodId;
+    private javax.swing.JTextField prodName;
+    private javax.swing.JTextField prodQty;
+    private javax.swing.JTable prodTable;
     // End of variables declaration//GEN-END:variables
 }
