@@ -16,12 +16,10 @@ public class HomeScreen extends javax.swing.JFrame {
     
     private int mouseX, mouseY;
     
-    public void CloseFrame(){
-        System.exit(0);
-        //super.dispose();
-    }
     public HomeScreen() {
         initComponents();
+        selectLabel(1);
+        jDesktopPane1.add(new Products()).setVisible(true);
     }
     public void selectLabel(int a)
     {
@@ -106,6 +104,8 @@ public class HomeScreen extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("GESTIÓN DE INVENTARIO");
 
+        jLabelLogo4.setIcon(new javax.swing.ImageIcon("C:\\Users\\luisa\\OneDrive - up.edu.mx\\Documents\\ProgrammingProjects\\JavaProjects\\GoTrafyInventory\\src\\main\\java\\com\\mycompany\\gotrafyinventory\\Icons\\Logo2.png")); // NOI18N
+
         jPanel5.setBackground(new java.awt.Color(52, 99, 76));
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -160,7 +160,7 @@ public class HomeScreen extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel6)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -230,6 +230,11 @@ public class HomeScreen extends javax.swing.JFrame {
         jButton1.setText("Cerrar sesión");
         jButton1.setBorder(null);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -339,11 +344,11 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
-        CloseFrame();
+        System.exit(0);
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void jLabelCrossMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCrossMouseClicked
-        CloseFrame();
+        System.exit(0);
     }//GEN-LAST:event_jLabelCrossMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -353,7 +358,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private void jLabelCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCustomerMouseClicked
         selectLabel(4);
         if (jDesktopPane1.getAllFrames().length == 0)
-        jDesktopPane1.add(new Customer()).setVisible(true);
+            jDesktopPane1.add(new Customer()).setVisible(true);
         else
         {
             jDesktopPane1.remove(0);
@@ -366,7 +371,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private void jLabelOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelOrderMouseClicked
         selectLabel(3);
         if (jDesktopPane1.getAllFrames().length == 0)
-        jDesktopPane1.add(new Orders()).setVisible(true);
+            jDesktopPane1.add(new Orders()).setVisible(true);
         else
         {
             jDesktopPane1.remove(0);
@@ -379,7 +384,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private void jLabelUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUserMouseClicked
         selectLabel(5);
         if (jDesktopPane1.getAllFrames().length == 0)
-        jDesktopPane1.add(new User()).setVisible(true);
+            jDesktopPane1.add(new User()).setVisible(true);
         else
         {
             jDesktopPane1.remove(0);
@@ -392,7 +397,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private void jLabelProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelProductMouseClicked
         selectLabel(1);
         if (jDesktopPane1.getAllFrames().length == 0)
-        jDesktopPane1.add(new Products()).setVisible(true);
+            jDesktopPane1.add(new Products()).setVisible(true);
         else
         {
             jDesktopPane1.remove(0);
@@ -405,7 +410,7 @@ public class HomeScreen extends javax.swing.JFrame {
     private void jLabelCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCategoryMouseClicked
         selectLabel(2);
         if (jDesktopPane1.getAllFrames().length == 0)
-        jDesktopPane1.add(new Category()).setVisible(true);
+            jDesktopPane1.add(new Category()).setVisible(true);
         else
         {
             jDesktopPane1.remove(0);
@@ -414,6 +419,11 @@ public class HomeScreen extends javax.swing.JFrame {
             repaint();
         }
     }//GEN-LAST:event_jLabelCategoryMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        new LoginScreen().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -453,46 +463,18 @@ public class HomeScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JDesktopPane jDesktopPane2;
-    private javax.swing.JDesktopPane jDesktopPane3;
-    private javax.swing.JDesktopPane jDesktopPane4;
-    private javax.swing.JDesktopPane jDesktopPane5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelCategory;
-    private javax.swing.JLabel jLabelCross;
-    private javax.swing.JLabel jLabelCross1;
-    private javax.swing.JLabel jLabelCross2;
-    private javax.swing.JLabel jLabelCross3;
     private javax.swing.JLabel jLabelCross4;
     private javax.swing.JLabel jLabelCustomer;
-    private javax.swing.JLabel jLabelLogo;
-    private javax.swing.JLabel jLabelLogo1;
-    private javax.swing.JLabel jLabelLogo2;
-    private javax.swing.JLabel jLabelLogo3;
     private javax.swing.JLabel jLabelLogo4;
     private javax.swing.JLabel jLabelOrder;
     private javax.swing.JLabel jLabelProduct;
     private javax.swing.JLabel jLabelUser;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     // End of variables declaration//GEN-END:variables
 }

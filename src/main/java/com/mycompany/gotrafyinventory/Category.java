@@ -6,11 +6,17 @@ package com.mycompany.gotrafyinventory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
-
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author luisa
@@ -18,15 +24,19 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 public class Category extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Product
+     * Creates new form Category
      */
     public Category() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
+        updateCatTable();
     }
 
+    Connection Con = null;
+    Statement St = null;
+    ResultSet Rs = null;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,7 +53,7 @@ public class Category extends javax.swing.JInternalFrame {
         jLabel124 = new javax.swing.JLabel();
         jLabel125 = new javax.swing.JLabel();
         jScrollPane26 = new javax.swing.JScrollPane();
-        products5 = new javax.swing.JTable();
+        catTable = new javax.swing.JTable();
         addBtn5 = new javax.swing.JButton();
         deleteBtn5 = new javax.swing.JButton();
         jSeparator52 = new javax.swing.JSeparator();
@@ -86,10 +96,10 @@ public class Category extends javax.swing.JInternalFrame {
         jLabel125.setFocusable(false);
         jLabel125.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        products5.setBackground(new java.awt.Color(255, 255, 255));
-        products5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        products5.setForeground(new java.awt.Color(51, 51, 51));
-        products5.setModel(new javax.swing.table.DefaultTableModel(
+        catTable.setBackground(new java.awt.Color(255, 255, 255));
+        catTable.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        catTable.setForeground(new java.awt.Color(51, 51, 51));
+        catTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -97,11 +107,11 @@ public class Category extends javax.swing.JInternalFrame {
                 "ID", "NOMBRE"
             }
         ));
-        products5.setSelectionBackground(new java.awt.Color(110, 174, 133));
-        products5.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        products5.getTableHeader().setResizingAllowed(false);
-        products5.getTableHeader().setReorderingAllowed(false);
-        jScrollPane26.setViewportView(products5);
+        catTable.setSelectionBackground(new java.awt.Color(110, 174, 133));
+        catTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        catTable.getTableHeader().setResizingAllowed(false);
+        catTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane26.setViewportView(catTable);
 
         addBtn5.setBackground(new java.awt.Color(204, 204, 204));
         addBtn5.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
@@ -113,11 +123,6 @@ public class Category extends javax.swing.JInternalFrame {
                 addBtn5MouseClicked(evt);
             }
         });
-        addBtn5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtn5ActionPerformed(evt);
-            }
-        });
 
         deleteBtn5.setBackground(new java.awt.Color(255, 153, 153));
         deleteBtn5.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
@@ -127,9 +132,9 @@ public class Category extends javax.swing.JInternalFrame {
         deleteBtn5.setMaximumSize(new java.awt.Dimension(51, 26));
         deleteBtn5.setMinimumSize(new java.awt.Dimension(51, 26));
         deleteBtn5.setPreferredSize(new java.awt.Dimension(51, 26));
-        deleteBtn5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteBtn5ActionPerformed(evt);
+        deleteBtn5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteBtn5MouseClicked(evt);
             }
         });
 
@@ -141,9 +146,9 @@ public class Category extends javax.swing.JInternalFrame {
         editBtn5.setText("Editar");
         editBtn5.setBorder(null);
         editBtn5.setPreferredSize(new java.awt.Dimension(36, 26));
-        editBtn5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtn5ActionPerformed(evt);
+        editBtn5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editBtn5MouseClicked(evt);
             }
         });
 
@@ -228,7 +233,21 @@ public class Category extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void updateCatTable()
+    {
+        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
+        String user = "root";
+        String ps = "cOCOROLOCO22";
+        try {
+            Con = DriverManager.getConnection(url, user, ps);
+            St = Con.createStatement();
+            Rs = St.executeQuery("select * from category");
+            catTable.setModel(DbUtils.resultSetToTableModel(Rs));
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    //AGREGAR
     private void addBtn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtn5MouseClicked
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
@@ -248,34 +267,74 @@ public class Category extends javax.swing.JInternalFrame {
             //int row =add.executeUpdate();
             add.execute();
             Con.close();
-            JOptionPane.showMessageDialog(this, "Producto añadido correctamente");
+            JOptionPane.showMessageDialog(this, "Categoria añadida correctamente");
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            //Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
-            //Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_addBtn5MouseClicked
 
-    private void addBtn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtn5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addBtn5ActionPerformed
+    // ELIMINAR
+    private void deleteBtn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBtn5MouseClicked
+        if(catId.getText().isEmpty())
+            JOptionPane.showMessageDialog(this, "Seleccione una categoria");
+        else
+        {
+            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
+            String user = "root";
+            String ps = "cOCOROLOCO22";
+            try {
+                Con = DriverManager.getConnection(url, user, ps);
+                Statement Add = Con.createStatement();
+                Rs = Add.executeQuery("select * from category where id="+catId.getText());
+                if(Rs.next())
+                {
+                    Add.executeUpdate("Delete from category where id="+catId.getText());
+                    updateCatTable(); 
+                    JOptionPane.showMessageDialog(this, "Categoria eliminada correctamente");
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "ID de la categoria no encontrado");
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+            } 
+        }
+    }//GEN-LAST:event_deleteBtn5MouseClicked
 
-    private void deleteBtn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteBtn5ActionPerformed
-
-    private void editBtn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtn5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editBtn5ActionPerformed
-
+    private void editBtn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBtn5MouseClicked
+        if(catId.getText().isEmpty() || catName.getText().isEmpty())
+            JOptionPane.showMessageDialog(this, "Falta Información");
+        else
+        {
+            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
+            String user = "root";
+            String ps = "cOCOROLOCO22";
+            try {
+                Con = DriverManager.getConnection(url, user, ps);
+                Statement Add = Con.createStatement();
+                Rs = Add.executeQuery("select * from category where id="+catId.getText());
+                if(Rs.next())
+                {
+                    Add.executeUpdate("update category set NAME='"+catName.getText()+"' where ID="+catId.getText());
+                    updateCatTable(); 
+                    JOptionPane.showMessageDialog(this, "CAtegoria modificado correctamente");
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "ID de la categoria no encontrado.\nEl ID no puede ser modificado."); 
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_editBtn5MouseClicked
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn5;
     private javax.swing.JTextField catId;
     private javax.swing.JTextField catName;
+    private javax.swing.JTable catTable;
     private javax.swing.JButton deleteBtn5;
     private javax.swing.JButton editBtn5;
     private javax.swing.Box.Filler filler1;
@@ -286,6 +345,5 @@ public class Category extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane26;
     private javax.swing.JSeparator jSeparator51;
     private javax.swing.JSeparator jSeparator52;
-    private javax.swing.JTable products5;
     // End of variables declaration//GEN-END:variables
 }
