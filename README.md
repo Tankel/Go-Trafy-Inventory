@@ -13,4 +13,4 @@ Below is a screenshot of the main interface of Go-Trafy-Inventory.
 ![Go-Trafy-Inventory](/HomeScreen.png)
 
 ## Contributions
-We welcome contributions from the community. If you find a bug or have a suggestion for improvement, please create an issue on the repository or submit a pull request.
+I welcome contributions from the community. If you find a bug or have a suggestion for improvement, please create an issue on the repository or submit a pull request.
