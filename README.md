@@ -6,4 +6,4 @@ Not finsished yet.
 Future POS system.
 
 ## Main interface 
-![Calculator](/src/main/java/com/mycompany/calculadora1/Calculator.png)
+![Go-Trafy-Inventory](/HomeScreen.png)
