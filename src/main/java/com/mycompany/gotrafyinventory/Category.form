@@ -70,11 +70,11 @@
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="editBtn5" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <Component id="catEditBtn" min="-2" pref="110" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="deleteBtn5" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <Component id="catDeleteBtn" min="-2" pref="110" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="addBtn5" alignment="0" max="32767" attributes="0"/>
+                              <Component id="catAddBtn" alignment="0" max="32767" attributes="0"/>
                               <Component id="jSeparator52" alignment="0" pref="236" max="32767" attributes="0"/>
                               <Component id="filler1" max="32767" attributes="0"/>
                           </Group>
@@ -114,11 +114,11 @@
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Component id="jSeparator52" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="addBtn5" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="catAddBtn" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="editBtn5" alignment="0" pref="34" max="32767" attributes="0"/>
-                              <Component id="deleteBtn5" alignment="0" max="32767" attributes="0"/>
+                              <Component id="catEditBtn" alignment="0" pref="34" max="32767" attributes="0"/>
+                              <Component id="catDeleteBtn" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -244,10 +244,13 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="catTableMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="addBtn5">
+        <Component class="javax.swing.JButton" name="catAddBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -264,10 +267,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addBtn5MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="catAddBtnMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="deleteBtn5">
+        <Component class="javax.swing.JButton" name="catDeleteBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="ff" type="rgb"/>
@@ -293,7 +296,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deleteBtn5MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="catDeleteBtnMouseClicked"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator52">
@@ -303,7 +306,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="editBtn5">
+        <Component class="javax.swing.JButton" name="catEditBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -323,7 +326,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="editBtn5MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="catEditBtnMouseClicked"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="catName">
