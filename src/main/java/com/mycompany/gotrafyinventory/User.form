@@ -73,11 +73,11 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="editBtn" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <Component id="userEditBtn" min="-2" pref="110" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="deleteBtn" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <Component id="userDeleteBtn" min="-2" pref="110" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="addBtn" alignment="0" max="32767" attributes="0"/>
+                              <Component id="userAddBtn" alignment="0" max="32767" attributes="0"/>
                               <Component id="jSeparator2" alignment="0" min="-2" pref="236" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -124,11 +124,11 @@
                           <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                           <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="addBtn" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="userAddBtn" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="editBtn" alignment="0" pref="34" max="32767" attributes="0"/>
-                              <Component id="deleteBtn" alignment="0" max="32767" attributes="0"/>
+                              <Component id="userEditBtn" alignment="0" pref="34" max="32767" attributes="0"/>
+                              <Component id="userDeleteBtn" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -256,7 +256,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="products">
+            <Component class="javax.swing.JTable" name="userTable">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new java.awt.Color(255, 255, 255)" type="code"/>
@@ -309,10 +309,13 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="userTableMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="addBtn">
+        <Component class="javax.swing.JButton" name="userAddBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -329,11 +332,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addBtnMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addBtnActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="userAddBtnMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="deleteBtn">
+        <Component class="javax.swing.JButton" name="userDeleteBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="ff" type="rgb"/>
@@ -359,7 +361,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userDeleteBtnActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
@@ -369,7 +371,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="editBtn">
+        <Component class="javax.swing.JButton" name="userEditBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -389,7 +391,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userEditBtnActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="userEmail">

@@ -71,11 +71,11 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="editBtn1" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <Component id="custEditBtn" min="-2" pref="110" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="deleteBtn1" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <Component id="custDelBtn" min="-2" pref="110" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="addBtn1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="custAddBtn" alignment="0" max="32767" attributes="0"/>
                               <Component id="jSeparator4" alignment="0" pref="236" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
@@ -126,11 +126,11 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jSeparator4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="addBtn1" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="custAddBtn" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="editBtn1" alignment="0" pref="34" max="32767" attributes="0"/>
-                              <Component id="deleteBtn1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="custEditBtn" alignment="0" pref="34" max="32767" attributes="0"/>
+                              <Component id="custDelBtn" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -243,7 +243,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="products1">
+            <Component class="javax.swing.JTable" name="custTable">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new java.awt.Color(255, 255, 255)" type="code"/>
@@ -290,10 +290,13 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="custTableMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="addBtn1">
+        <Component class="javax.swing.JButton" name="custAddBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -310,11 +313,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addBtn1MouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addBtn1ActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="custAddBtnMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="deleteBtn1">
+        <Component class="javax.swing.JButton" name="custDelBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="ff" type="rgb"/>
@@ -340,7 +342,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteBtn1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="custDelBtnActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator4">
@@ -350,7 +352,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="editBtn1">
+        <Component class="javax.swing.JButton" name="custEditBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -370,7 +372,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editBtn1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="custEditBtnActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="custName">
