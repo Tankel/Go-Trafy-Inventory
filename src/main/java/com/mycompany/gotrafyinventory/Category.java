@@ -54,10 +54,10 @@ public class Category extends javax.swing.JInternalFrame {
         jLabel125 = new javax.swing.JLabel();
         jScrollPane26 = new javax.swing.JScrollPane();
         catTable = new javax.swing.JTable();
-        addBtn5 = new javax.swing.JButton();
-        deleteBtn5 = new javax.swing.JButton();
+        catAddBtn = new javax.swing.JButton();
+        catDeleteBtn = new javax.swing.JButton();
         jSeparator52 = new javax.swing.JSeparator();
-        editBtn5 = new javax.swing.JButton();
+        catEditBtn = new javax.swing.JButton();
         catName = new javax.swing.JTextField();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(150, 0), new java.awt.Dimension(150, 0), new java.awt.Dimension(150, 32767));
 
@@ -111,44 +111,49 @@ public class Category extends javax.swing.JInternalFrame {
         catTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         catTable.getTableHeader().setResizingAllowed(false);
         catTable.getTableHeader().setReorderingAllowed(false);
+        catTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                catTableMouseClicked(evt);
+            }
+        });
         jScrollPane26.setViewportView(catTable);
 
-        addBtn5.setBackground(new java.awt.Color(204, 204, 204));
-        addBtn5.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        addBtn5.setForeground(new java.awt.Color(102, 102, 102));
-        addBtn5.setText("Agregar");
-        addBtn5.setBorder(null);
-        addBtn5.addMouseListener(new java.awt.event.MouseAdapter() {
+        catAddBtn.setBackground(new java.awt.Color(204, 204, 204));
+        catAddBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        catAddBtn.setForeground(new java.awt.Color(102, 102, 102));
+        catAddBtn.setText("Agregar");
+        catAddBtn.setBorder(null);
+        catAddBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addBtn5MouseClicked(evt);
+                catAddBtnMouseClicked(evt);
             }
         });
 
-        deleteBtn5.setBackground(new java.awt.Color(255, 153, 153));
-        deleteBtn5.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        deleteBtn5.setForeground(new java.awt.Color(102, 102, 102));
-        deleteBtn5.setText("Eliminar");
-        deleteBtn5.setBorder(null);
-        deleteBtn5.setMaximumSize(new java.awt.Dimension(51, 26));
-        deleteBtn5.setMinimumSize(new java.awt.Dimension(51, 26));
-        deleteBtn5.setPreferredSize(new java.awt.Dimension(51, 26));
-        deleteBtn5.addMouseListener(new java.awt.event.MouseAdapter() {
+        catDeleteBtn.setBackground(new java.awt.Color(255, 153, 153));
+        catDeleteBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        catDeleteBtn.setForeground(new java.awt.Color(102, 102, 102));
+        catDeleteBtn.setText("Eliminar");
+        catDeleteBtn.setBorder(null);
+        catDeleteBtn.setMaximumSize(new java.awt.Dimension(51, 26));
+        catDeleteBtn.setMinimumSize(new java.awt.Dimension(51, 26));
+        catDeleteBtn.setPreferredSize(new java.awt.Dimension(51, 26));
+        catDeleteBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                deleteBtn5MouseClicked(evt);
+                catDeleteBtnMouseClicked(evt);
             }
         });
 
         jSeparator52.setForeground(new java.awt.Color(110, 174, 133));
 
-        editBtn5.setBackground(new java.awt.Color(204, 204, 204));
-        editBtn5.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        editBtn5.setForeground(new java.awt.Color(102, 102, 102));
-        editBtn5.setText("Editar");
-        editBtn5.setBorder(null);
-        editBtn5.setPreferredSize(new java.awt.Dimension(36, 26));
-        editBtn5.addMouseListener(new java.awt.event.MouseAdapter() {
+        catEditBtn.setBackground(new java.awt.Color(204, 204, 204));
+        catEditBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        catEditBtn.setForeground(new java.awt.Color(102, 102, 102));
+        catEditBtn.setText("Editar");
+        catEditBtn.setBorder(null);
+        catEditBtn.setPreferredSize(new java.awt.Dimension(36, 26));
+        catEditBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                editBtn5MouseClicked(evt);
+                catEditBtnMouseClicked(evt);
             }
         });
 
@@ -177,10 +182,10 @@ public class Category extends javax.swing.JInternalFrame {
                                     .addComponent(catName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
-                                .addComponent(editBtn5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(catEditBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(deleteBtn5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(addBtn5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(catDeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(catAddBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator52, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                             .addComponent(filler1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
@@ -212,11 +217,11 @@ public class Category extends javax.swing.JInternalFrame {
                         .addGap(42, 42, 42)
                         .addComponent(jSeparator52, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(addBtn5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(catAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(editBtn5, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                            .addComponent(deleteBtn5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(catEditBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                            .addComponent(catDeleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -248,7 +253,7 @@ public class Category extends javax.swing.JInternalFrame {
         }
     }
     //AGREGAR
-    private void addBtn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtn5MouseClicked
+    private void catAddBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_catAddBtnMouseClicked
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
         String ps = "cOCOROLOCO22";
@@ -257,7 +262,7 @@ public class Category extends javax.swing.JInternalFrame {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection Con = DriverManager.getConnection(url, user, ps);
-            System.out.print("Coneccion exitosa");
+            System.out.print("Conexion exitosa");
 
             //Con = DriverManager.getConnection("jdbc:derby://localhost:1527/InventoryDB","Luis","Cocoroloco22");
             String sql = "Insert into category (id, name)" + "values (?, ?)";
@@ -268,16 +273,16 @@ public class Category extends javax.swing.JInternalFrame {
             add.execute();
             Con.close();
             JOptionPane.showMessageDialog(this, "Categoria añadida correctamente");
-
+            updateCatTable();
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_addBtn5MouseClicked
+    }//GEN-LAST:event_catAddBtnMouseClicked
 
     // ELIMINAR
-    private void deleteBtn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBtn5MouseClicked
+    private void catDeleteBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_catDeleteBtnMouseClicked
         if(catId.getText().isEmpty())
             JOptionPane.showMessageDialog(this, "Seleccione una categoria");
         else
@@ -301,9 +306,10 @@ public class Category extends javax.swing.JInternalFrame {
                 ex.printStackTrace();
             } 
         }
-    }//GEN-LAST:event_deleteBtn5MouseClicked
+    }//GEN-LAST:event_catDeleteBtnMouseClicked
 
-    private void editBtn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBtn5MouseClicked
+    //EDITAR
+    private void catEditBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_catEditBtnMouseClicked
         if(catId.getText().isEmpty() || catName.getText().isEmpty())
             JOptionPane.showMessageDialog(this, "Falta Información");
         else
@@ -319,7 +325,7 @@ public class Category extends javax.swing.JInternalFrame {
                 {
                     Add.executeUpdate("update category set NAME='"+catName.getText()+"' where ID="+catId.getText());
                     updateCatTable(); 
-                    JOptionPane.showMessageDialog(this, "CAtegoria modificado correctamente");
+                    JOptionPane.showMessageDialog(this, "Categoria modificado correctamente");
                 }
                 else
                     JOptionPane.showMessageDialog(this, "ID de la categoria no encontrado.\nEl ID no puede ser modificado."); 
@@ -327,16 +333,24 @@ public class Category extends javax.swing.JInternalFrame {
                 ex.printStackTrace();
             }
         }
-    }//GEN-LAST:event_editBtn5MouseClicked
+    }//GEN-LAST:event_catEditBtnMouseClicked
+
+    //SELECCIONAR
+    private void catTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_catTableMouseClicked
+        DefaultTableModel model =  (DefaultTableModel) catTable.getModel();
+        int row = catTable.getSelectedRow();
+        catId.setText(model.getValueAt (row, 0).toString());
+        catName.setText(model.getValueAt (row, 1).toString());
+    }//GEN-LAST:event_catTableMouseClicked
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addBtn5;
+    private javax.swing.JButton catAddBtn;
+    private javax.swing.JButton catDeleteBtn;
+    private javax.swing.JButton catEditBtn;
     private javax.swing.JTextField catId;
     private javax.swing.JTextField catName;
     private javax.swing.JTable catTable;
-    private javax.swing.JButton deleteBtn5;
-    private javax.swing.JButton editBtn5;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel123;
     private javax.swing.JLabel jLabel124;
