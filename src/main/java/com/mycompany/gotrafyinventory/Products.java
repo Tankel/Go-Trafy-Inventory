@@ -469,10 +469,10 @@ public class Products extends javax.swing.JInternalFrame {
             
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection Con = DriverManager.getConnection(url, user, ps);
-            System.out.print("Coneccion exitosa");
+            System.out.print("Conexion exitosa");
             
             //Con = DriverManager.getConnection("jdbc:derby://localhost:1527/InventoryDB","Luis","Cocoroloco22");
-            String sql = "Insert into products (id, name, quantity, description, category)" + "values (?, ?, ? , ?, ?)";
+            String sql = "Insert into products (id, name, quantity, description, category)" + "values (?, ?, ?, ?, ?)";
             PreparedStatement add = Con.prepareStatement(sql);
             add.setInt(1, Integer.valueOf(prodId.getText()));
             add.setString(2,prodName.getText());

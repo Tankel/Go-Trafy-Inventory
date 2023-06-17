@@ -6,10 +6,17 @@ package com.mycompany.gotrafyinventory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -18,15 +25,20 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 public class User extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Product
+     * Creates new form Useruct
      */
     public User() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
+        updateUserTable();
     }
 
+    
+    Connection Con = null;
+    Statement St = null;
+    ResultSet Rs = null;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,11 +58,11 @@ public class User extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         userPhone = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        products = new javax.swing.JTable();
-        addBtn = new javax.swing.JButton();
-        deleteBtn = new javax.swing.JButton();
+        userTable = new javax.swing.JTable();
+        userAddBtn = new javax.swing.JButton();
+        userDeleteBtn = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        editBtn = new javax.swing.JButton();
+        userEditBtn = new javax.swing.JButton();
         userEmail = new javax.swing.JTextField();
         userPass = new javax.swing.JTextField();
 
@@ -109,10 +121,10 @@ public class User extends javax.swing.JInternalFrame {
         userPhone.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
         userPhone.setForeground(new java.awt.Color(51, 51, 51));
 
-        products.setBackground(new java.awt.Color(255, 255, 255));
-        products.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        products.setForeground(new java.awt.Color(51, 51, 51));
-        products.setModel(new javax.swing.table.DefaultTableModel(
+        userTable.setBackground(new java.awt.Color(255, 255, 255));
+        userTable.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        userTable.setForeground(new java.awt.Color(51, 51, 51));
+        userTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -120,53 +132,53 @@ public class User extends javax.swing.JInternalFrame {
                 "USUARIO", "CONTRASEÑA", "TELÉFONO", "CORREO"
             }
         ));
-        products.setSelectionBackground(new java.awt.Color(110, 174, 133));
-        products.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        products.getTableHeader().setResizingAllowed(false);
-        products.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(products);
-
-        addBtn.setBackground(new java.awt.Color(204, 204, 204));
-        addBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        addBtn.setForeground(new java.awt.Color(102, 102, 102));
-        addBtn.setText("Agregar");
-        addBtn.setBorder(null);
-        addBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        userTable.setSelectionBackground(new java.awt.Color(110, 174, 133));
+        userTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        userTable.getTableHeader().setResizingAllowed(false);
+        userTable.getTableHeader().setReorderingAllowed(false);
+        userTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addBtnMouseClicked(evt);
+                userTableMouseClicked(evt);
             }
         });
-        addBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtnActionPerformed(evt);
+        jScrollPane1.setViewportView(userTable);
+
+        userAddBtn.setBackground(new java.awt.Color(204, 204, 204));
+        userAddBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        userAddBtn.setForeground(new java.awt.Color(102, 102, 102));
+        userAddBtn.setText("Agregar");
+        userAddBtn.setBorder(null);
+        userAddBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userAddBtnMouseClicked(evt);
             }
         });
 
-        deleteBtn.setBackground(new java.awt.Color(255, 153, 153));
-        deleteBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        deleteBtn.setForeground(new java.awt.Color(102, 102, 102));
-        deleteBtn.setText("Eliminar");
-        deleteBtn.setBorder(null);
-        deleteBtn.setMaximumSize(new java.awt.Dimension(51, 26));
-        deleteBtn.setMinimumSize(new java.awt.Dimension(51, 26));
-        deleteBtn.setPreferredSize(new java.awt.Dimension(51, 26));
-        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+        userDeleteBtn.setBackground(new java.awt.Color(255, 153, 153));
+        userDeleteBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        userDeleteBtn.setForeground(new java.awt.Color(102, 102, 102));
+        userDeleteBtn.setText("Eliminar");
+        userDeleteBtn.setBorder(null);
+        userDeleteBtn.setMaximumSize(new java.awt.Dimension(51, 26));
+        userDeleteBtn.setMinimumSize(new java.awt.Dimension(51, 26));
+        userDeleteBtn.setPreferredSize(new java.awt.Dimension(51, 26));
+        userDeleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteBtnActionPerformed(evt);
+                userDeleteBtnActionPerformed(evt);
             }
         });
 
         jSeparator2.setForeground(new java.awt.Color(110, 174, 133));
 
-        editBtn.setBackground(new java.awt.Color(204, 204, 204));
-        editBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        editBtn.setForeground(new java.awt.Color(102, 102, 102));
-        editBtn.setText("Editar");
-        editBtn.setBorder(null);
-        editBtn.setPreferredSize(new java.awt.Dimension(36, 26));
-        editBtn.addActionListener(new java.awt.event.ActionListener() {
+        userEditBtn.setBackground(new java.awt.Color(204, 204, 204));
+        userEditBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        userEditBtn.setForeground(new java.awt.Color(102, 102, 102));
+        userEditBtn.setText("Editar");
+        userEditBtn.setBorder(null);
+        userEditBtn.setPreferredSize(new java.awt.Dimension(36, 26));
+        userEditBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtnActionPerformed(evt);
+                userEditBtnActionPerformed(evt);
             }
         });
 
@@ -202,10 +214,10 @@ public class User extends javax.swing.JInternalFrame {
                                     .addComponent(userEmail)
                                     .addComponent(userPass, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(userEditBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(userDeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(userAddBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -242,11 +254,11 @@ public class User extends javax.swing.JInternalFrame {
                         .addGap(68, 68, 68)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(userAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                            .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(userEditBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                            .addComponent(userDeleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -264,7 +276,23 @@ public class User extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtnMouseClicked
+    public void updateUserTable()
+    {
+        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
+        String user = "root";
+        String ps = "cOCOROLOCO22";
+        try {
+            Con = DriverManager.getConnection(url, user, ps);
+            St = Con.createStatement();
+            Rs = St.executeQuery("select * from users");
+            userTable.setModel(DbUtils.resultSetToTableModel(Rs));
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    
+    private void userAddBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userAddBtnMouseClicked
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
         String ps = "cOCOROLOCO22";
@@ -273,10 +301,10 @@ public class User extends javax.swing.JInternalFrame {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection Con = DriverManager.getConnection(url, user, ps);
-            System.out.print("Coneccion exitosa");
+            System.out.print("Conexion exitosa");
 
             //Con = DriverManager.getConnection("jdbc:derby://localhost:1527/InventoryDB","Luis","Cocoroloco22");
-            String sql = "Insert into user (user, password, phone, email)" + "values (?, ?, ? , ?)";
+            String sql = "Insert into users (username, password, phone, email)" + "values (?, ?, ?, ?)";
             PreparedStatement add = Con.prepareStatement(sql);
             add.setString(1, userName.getText());
             add.setString(2,userPass.getText());
@@ -285,34 +313,82 @@ public class User extends javax.swing.JInternalFrame {
             //int row =add.executeUpdate();
             add.execute();
             Con.close();
-            JOptionPane.showMessageDialog(this, "Producto añadido correctamente");
-
+            JOptionPane.showMessageDialog(this, "Usuario añadido correctamente");
+            updateUserTable();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            //Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Useructs.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
-            //Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Useructs.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_addBtnMouseClicked
+    }//GEN-LAST:event_userAddBtnMouseClicked
 
-    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addBtnActionPerformed
+    //ELIMINAR
+    private void userDeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userDeleteBtnActionPerformed
+        if(userName.getText().isEmpty())
+            JOptionPane.showMessageDialog(this, "Seleccione un usuario");
+        else
+        {
+            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
+            String user = "root";
+            String ps = "cOCOROLOCO22";
+            try {
+                Con = DriverManager.getConnection(url, user, ps);
+                Statement Add = Con.createStatement();
+                Rs = Add.executeQuery("select * from users where USERNAME='"+userName.getText()+"'");
+                if(Rs.next())
+                {
+                    Add.executeUpdate("Delete from users where USERNAME='"+userName.getText()+"'");
+                    updateUserTable(); 
+                    JOptionPane.showMessageDialog(this, "Usuario eliminado correctamente");
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "Nombre de usuario no encontrado");
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+            } 
+        }
+    }//GEN-LAST:event_userDeleteBtnActionPerformed
 
-    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteBtnActionPerformed
+    //EDITAR
+    private void userEditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userEditBtnActionPerformed
+        if(userName.getText().isEmpty() || userPass.getText().isEmpty() || userPhone.getText().isEmpty() || userEmail.getText().isEmpty() )
+            JOptionPane.showMessageDialog(this, "Falta Información");
+        else
+        {
+            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
+            String user = "root";
+            String ps = "cOCOROLOCO22";
+            try {
+                Con = DriverManager.getConnection(url, user, ps);
+                Statement Add = Con.createStatement();
+                Rs = Add.executeQuery("select * from users where USERNAME='"+userName.getText()+"'");
+                if(Rs.next())
+                {
+                    Add.executeUpdate("update users set PASSWORD='"+userPass.getText()+"', PHONE='"+userPhone.getText()+"', EMAIL='"+userEmail.getText()+"' where USERNAME='"+userName.getText()+"'");
+                    updateUserTable(); 
+                    JOptionPane.showMessageDialog(this, "Datos del usuario modificado correctamente");
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "Nombre de usuario no encontrado.\nEl nombre de usuario no puede ser modificado."); 
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_userEditBtnActionPerformed
 
-    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editBtnActionPerformed
-
+    private void userTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTableMouseClicked
+        DefaultTableModel model =  (DefaultTableModel) userTable.getModel();
+        int row = userTable.getSelectedRow();
+        userName.setText(model.getValueAt (row, 0).toString());
+        userPass.setText(model.getValueAt (row, 1).toString());
+        userPhone.setText(model.getValueAt (row, 2).toString());
+        userEmail.setText(model.getValueAt (row, 3).toString());
+    }//GEN-LAST:event_userTableMouseClicked
+                                   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addBtn;
-    private javax.swing.JButton deleteBtn;
-    private javax.swing.JButton editBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -322,10 +398,13 @@ public class User extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable products;
+    private javax.swing.JButton userAddBtn;
+    private javax.swing.JButton userDeleteBtn;
+    private javax.swing.JButton userEditBtn;
     private javax.swing.JTextField userEmail;
     private javax.swing.JTextField userName;
     private javax.swing.JTextField userPass;
     private javax.swing.JTextField userPhone;
+    private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 }

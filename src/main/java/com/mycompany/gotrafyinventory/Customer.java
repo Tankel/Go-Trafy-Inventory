@@ -6,10 +6,17 @@ package com.mycompany.gotrafyinventory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 
 public class Customer extends javax.swing.JInternalFrame {
 
@@ -21,8 +28,12 @@ public class Customer extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bui = (BasicInternalFrameUI) this.getUI();
         bui.setNorthPane(null);
+        updateCustTable();
     }
 
+    Connection Con = null;
+    Statement St = null;
+    ResultSet Rs = null;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,11 +52,11 @@ public class Customer extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         custQty = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        products1 = new javax.swing.JTable();
-        addBtn1 = new javax.swing.JButton();
-        deleteBtn1 = new javax.swing.JButton();
+        custTable = new javax.swing.JTable();
+        custAddBtn = new javax.swing.JButton();
+        custDelBtn = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
-        editBtn1 = new javax.swing.JButton();
+        custEditBtn = new javax.swing.JButton();
         custName = new javax.swing.JTextField();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(200, 0), new java.awt.Dimension(200, 0), new java.awt.Dimension(200, 32767));
@@ -97,10 +108,10 @@ public class Customer extends javax.swing.JInternalFrame {
         custQty.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
         custQty.setForeground(new java.awt.Color(51, 51, 51));
 
-        products1.setBackground(new java.awt.Color(255, 255, 255));
-        products1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        products1.setForeground(new java.awt.Color(51, 51, 51));
-        products1.setModel(new javax.swing.table.DefaultTableModel(
+        custTable.setBackground(new java.awt.Color(255, 255, 255));
+        custTable.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        custTable.setForeground(new java.awt.Color(51, 51, 51));
+        custTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -108,53 +119,53 @@ public class Customer extends javax.swing.JInternalFrame {
                 "ID", "NOMBRE", "CANTIDAD"
             }
         ));
-        products1.setSelectionBackground(new java.awt.Color(110, 174, 133));
-        products1.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        products1.getTableHeader().setResizingAllowed(false);
-        products1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(products1);
-
-        addBtn1.setBackground(new java.awt.Color(204, 204, 204));
-        addBtn1.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        addBtn1.setForeground(new java.awt.Color(102, 102, 102));
-        addBtn1.setText("Agregar");
-        addBtn1.setBorder(null);
-        addBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+        custTable.setSelectionBackground(new java.awt.Color(110, 174, 133));
+        custTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        custTable.getTableHeader().setResizingAllowed(false);
+        custTable.getTableHeader().setReorderingAllowed(false);
+        custTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addBtn1MouseClicked(evt);
+                custTableMouseClicked(evt);
             }
         });
-        addBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtn1ActionPerformed(evt);
+        jScrollPane2.setViewportView(custTable);
+
+        custAddBtn.setBackground(new java.awt.Color(204, 204, 204));
+        custAddBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        custAddBtn.setForeground(new java.awt.Color(102, 102, 102));
+        custAddBtn.setText("Agregar");
+        custAddBtn.setBorder(null);
+        custAddBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                custAddBtnMouseClicked(evt);
             }
         });
 
-        deleteBtn1.setBackground(new java.awt.Color(255, 153, 153));
-        deleteBtn1.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        deleteBtn1.setForeground(new java.awt.Color(102, 102, 102));
-        deleteBtn1.setText("Eliminar");
-        deleteBtn1.setBorder(null);
-        deleteBtn1.setMaximumSize(new java.awt.Dimension(51, 26));
-        deleteBtn1.setMinimumSize(new java.awt.Dimension(51, 26));
-        deleteBtn1.setPreferredSize(new java.awt.Dimension(51, 26));
-        deleteBtn1.addActionListener(new java.awt.event.ActionListener() {
+        custDelBtn.setBackground(new java.awt.Color(255, 153, 153));
+        custDelBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        custDelBtn.setForeground(new java.awt.Color(102, 102, 102));
+        custDelBtn.setText("Eliminar");
+        custDelBtn.setBorder(null);
+        custDelBtn.setMaximumSize(new java.awt.Dimension(51, 26));
+        custDelBtn.setMinimumSize(new java.awt.Dimension(51, 26));
+        custDelBtn.setPreferredSize(new java.awt.Dimension(51, 26));
+        custDelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteBtn1ActionPerformed(evt);
+                custDelBtnActionPerformed(evt);
             }
         });
 
         jSeparator4.setForeground(new java.awt.Color(110, 174, 133));
 
-        editBtn1.setBackground(new java.awt.Color(204, 204, 204));
-        editBtn1.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        editBtn1.setForeground(new java.awt.Color(102, 102, 102));
-        editBtn1.setText("Editar");
-        editBtn1.setBorder(null);
-        editBtn1.setPreferredSize(new java.awt.Dimension(36, 26));
-        editBtn1.addActionListener(new java.awt.event.ActionListener() {
+        custEditBtn.setBackground(new java.awt.Color(204, 204, 204));
+        custEditBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        custEditBtn.setForeground(new java.awt.Color(102, 102, 102));
+        custEditBtn.setText("Editar");
+        custEditBtn.setBorder(null);
+        custEditBtn.setPreferredSize(new java.awt.Dimension(36, 26));
+        custEditBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtn1ActionPerformed(evt);
+                custEditBtnActionPerformed(evt);
             }
         });
 
@@ -184,10 +195,10 @@ public class Customer extends javax.swing.JInternalFrame {
                                     .addComponent(custId)
                                     .addComponent(custName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(editBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(custEditBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(deleteBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(addBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(custDelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(custAddBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(109, 109, 109)
@@ -228,11 +239,11 @@ public class Customer extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(addBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(custAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(editBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                            .addComponent(deleteBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(custEditBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                            .addComponent(custDelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -250,7 +261,23 @@ public class Customer extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtn1MouseClicked
+    public void updateCustTable()
+    {
+        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
+        String user = "root";
+        String ps = "cOCOROLOCO22";
+        try {
+            Con = DriverManager.getConnection(url, user, ps);
+            St = Con.createStatement();
+            Rs = St.executeQuery("select * from customer");
+            custTable.setModel(DbUtils.resultSetToTableModel(Rs));
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    //AGREGAR
+    private void custAddBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_custAddBtnMouseClicked
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
         String ps = "cOCOROLOCO22";
@@ -259,7 +286,7 @@ public class Customer extends javax.swing.JInternalFrame {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection Con = DriverManager.getConnection(url, user, ps);
-            System.out.print("Coneccion exitosa");
+            System.out.print("Conexion exitosa");
 
             //Con = DriverManager.getConnection("jdbc:derby://localhost:1527/InventoryDB","Luis","Cocoroloco22");
             String sql = "Insert into customer (id, name, quantity)" + "values (?, ?, ?)";
@@ -271,6 +298,7 @@ public class Customer extends javax.swing.JInternalFrame {
             add.execute();
             Con.close();
             JOptionPane.showMessageDialog(this, "Producto añadido correctamente");
+            updateCustTable();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -279,28 +307,80 @@ public class Customer extends javax.swing.JInternalFrame {
             ex.printStackTrace();
             //Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_addBtn1MouseClicked
+    }//GEN-LAST:event_custAddBtnMouseClicked
+    
+    //ELIMINAR
+    private void custDelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custDelBtnActionPerformed
+        if(custId.getText().isEmpty())
+            JOptionPane.showMessageDialog(this, "Seleccione un cliente");
+        else
+        {
+            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
+            String user = "root";
+            String ps = "cOCOROLOCO22";
+            try {
+                Con = DriverManager.getConnection(url, user, ps);
+                Statement Add = Con.createStatement();
+                Rs = Add.executeQuery("select * from customer where id="+custId.getText());
+                if(Rs.next())
+                {
+                    Add.executeUpdate("Delete from customer where id="+custId.getText());
+                    updateCustTable(); 
+                    JOptionPane.showMessageDialog(this, "Cliente eliminado correctamente");
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "ID del cliente no encontrado");
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+            } 
+        }
+    }//GEN-LAST:event_custDelBtnActionPerformed
 
-    private void addBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addBtn1ActionPerformed
-
-    private void deleteBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteBtn1ActionPerformed
-
-    private void editBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editBtn1ActionPerformed
+    //EDITAR
+    private void custEditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custEditBtnActionPerformed
+        if(custId.getText().isEmpty() || custName.getText().isEmpty() || custQty.getText().isEmpty())
+            JOptionPane.showMessageDialog(this, "Falta Información");
+        else
+        {
+            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
+            String user = "root";
+            String ps = "cOCOROLOCO22";
+            try {
+                Con = DriverManager.getConnection(url, user, ps);
+                Statement Add = Con.createStatement();
+                Rs = Add.executeQuery("select * from customer where id="+custId.getText());
+                if(Rs.next())
+                {
+                    Add.executeUpdate("update customer set NAME='"+custName.getText()+"', QUANTITY='"+custQty.getText()+"' where ID="+custId.getText());
+                    updateCustTable(); 
+                    JOptionPane.showMessageDialog(this, "Datos del cliente modificados correctamente");
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "ID del cliente no encontrado.\nEl ID no puede ser modificado."); 
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_custEditBtnActionPerformed
+    
+    //SELECCIONAR
+    private void custTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_custTableMouseClicked
+        DefaultTableModel model =  (DefaultTableModel) custTable.getModel();
+        int row = custTable.getSelectedRow();
+        custId.setText(model.getValueAt (row, 0).toString());
+        custName.setText(model.getValueAt (row, 1).toString());
+        custQty.setText(model.getValueAt (row, 2).toString());
+    }//GEN-LAST:event_custTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addBtn1;
+    private javax.swing.JButton custAddBtn;
+    private javax.swing.JButton custDelBtn;
+    private javax.swing.JButton custEditBtn;
     private javax.swing.JTextField custId;
     private javax.swing.JTextField custName;
     private javax.swing.JTextField custQty;
-    private javax.swing.JButton deleteBtn1;
-    private javax.swing.JButton editBtn1;
+    private javax.swing.JTable custTable;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler3;
     private javax.swing.JLabel jLabel10;
@@ -311,6 +391,5 @@ public class Customer extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTable products1;
     // End of variables declaration//GEN-END:variables
 }
