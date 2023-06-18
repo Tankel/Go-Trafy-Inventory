@@ -3,4 +3,5 @@ Go-Trafy-Inventory is an inventory management system app created for a local con
 
 ## Demo video
 A demo video showcasing the interface and all the features of the Go-Trafy-Inventory app can be found on YouTube. Click on the image below to watch the video:
+
 [![Trafy - Inventory Management App](https://img.youtube.com/vi/IxR1jZhJlJI/0.jpg)](https://youtu.be/watch?v=IxR1jZhJlJI "Trafy - Inventory Management App")
