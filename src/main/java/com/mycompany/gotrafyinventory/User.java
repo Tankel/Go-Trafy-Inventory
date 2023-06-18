@@ -78,7 +78,7 @@ public class User extends javax.swing.JInternalFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("GESTIÓN DE USUARIOS");
 
-        jSeparator1.setBackground(new java.awt.Color(255, 0, 0));
+        jSeparator1.setBackground(new java.awt.Color(110, 174, 133));
         jSeparator1.setForeground(new java.awt.Color(110, 174, 133));
 
         userName.setBackground(new java.awt.Color(255, 255, 255));
@@ -131,7 +131,15 @@ public class User extends javax.swing.JInternalFrame {
             new String [] {
                 "USUARIO", "CONTRASEÑA", "TELÉFONO", "CORREO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         userTable.setSelectionBackground(new java.awt.Color(110, 174, 133));
         userTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         userTable.getTableHeader().setResizingAllowed(false);
@@ -221,7 +229,7 @@ public class User extends javax.swing.JInternalFrame {
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 37, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,7 +274,7 @@ public class User extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,7 +288,7 @@ public class User extends javax.swing.JInternalFrame {
     {
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
-        String ps = "cOCOROLOCO22";
+        String ps = "hola123";
         try {
             Con = DriverManager.getConnection(url, user, ps);
             St = Con.createStatement();
@@ -295,7 +303,7 @@ public class User extends javax.swing.JInternalFrame {
     private void userAddBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userAddBtnMouseClicked
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
-        String ps = "cOCOROLOCO22";
+        String ps = "hola123";
         
         try {
 
@@ -332,7 +340,7 @@ public class User extends javax.swing.JInternalFrame {
         {
             String url = "jdbc:mysql://localhost:3306/trafy_inventory";
             String user = "root";
-            String ps = "cOCOROLOCO22";
+            String ps = "hola123";
             try {
                 Con = DriverManager.getConnection(url, user, ps);
                 Statement Add = Con.createStatement();
@@ -359,7 +367,7 @@ public class User extends javax.swing.JInternalFrame {
         {
             String url = "jdbc:mysql://localhost:3306/trafy_inventory";
             String user = "root";
-            String ps = "cOCOROLOCO22";
+            String ps = "hola123";
             try {
                 Con = DriverManager.getConnection(url, user, ps);
                 Statement Add = Con.createStatement();

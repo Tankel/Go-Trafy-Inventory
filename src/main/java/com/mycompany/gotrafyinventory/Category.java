@@ -73,7 +73,7 @@ public class Category extends javax.swing.JInternalFrame {
         jLabel123.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel123.setText("CATEGORIAS DE PRODUCTOS");
 
-        jSeparator51.setBackground(new java.awt.Color(255, 0, 0));
+        jSeparator51.setBackground(new java.awt.Color(110, 174, 133));
         jSeparator51.setForeground(new java.awt.Color(110, 174, 133));
 
         catId.setBackground(new java.awt.Color(255, 255, 255));
@@ -106,7 +106,15 @@ public class Category extends javax.swing.JInternalFrame {
             new String [] {
                 "ID", "NOMBRE"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         catTable.setSelectionBackground(new java.awt.Color(110, 174, 133));
         catTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         catTable.getTableHeader().setResizingAllowed(false);
@@ -186,11 +194,11 @@ public class Category extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(catDeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(catAddBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator52, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                            .addComponent(jSeparator52)
                             .addComponent(filler1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane26, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 35, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +222,7 @@ public class Category extends javax.swing.JInternalFrame {
                             .addComponent(catName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
+                        .addGap(30, 30, 30)
                         .addComponent(jSeparator52, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(catAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,7 +237,7 @@ public class Category extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
+            .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,7 +250,7 @@ public class Category extends javax.swing.JInternalFrame {
     {
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
-        String ps = "cOCOROLOCO22";
+        String ps = "hola123";
         try {
             Con = DriverManager.getConnection(url, user, ps);
             St = Con.createStatement();
@@ -256,7 +264,7 @@ public class Category extends javax.swing.JInternalFrame {
     private void catAddBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_catAddBtnMouseClicked
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
-        String ps = "cOCOROLOCO22";
+        String ps = "hola123";
         
         try {
 
@@ -289,7 +297,7 @@ public class Category extends javax.swing.JInternalFrame {
         {
             String url = "jdbc:mysql://localhost:3306/trafy_inventory";
             String user = "root";
-            String ps = "cOCOROLOCO22";
+            String ps = "hola123";
             try {
                 Con = DriverManager.getConnection(url, user, ps);
                 Statement Add = Con.createStatement();
@@ -316,7 +324,7 @@ public class Category extends javax.swing.JInternalFrame {
         {
             String url = "jdbc:mysql://localhost:3306/trafy_inventory";
             String user = "root";
-            String ps = "cOCOROLOCO22";
+            String ps = "hola123";
             try {
                 Con = DriverManager.getConnection(url, user, ps);
                 Statement Add = Con.createStatement();
