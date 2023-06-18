@@ -140,7 +140,8 @@ public class LoadingScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String args[]) throws InterruptedException {
+    public static void run() throws InterruptedException
+    {
         LoadingScreen splash = new LoadingScreen();
         splash.setVisible(true);
         for(int i=0; i<100; i++)
