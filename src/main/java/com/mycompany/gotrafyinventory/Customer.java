@@ -382,7 +382,7 @@ public class Customer extends javax.swing.JInternalFrame {
     {
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
-        String ps = "cOCOROLOCO22";
+        String ps = "hola123";
         try {
             Con = DriverManager.getConnection(url, user, ps);
             St = Con.createStatement();
@@ -397,7 +397,7 @@ public class Customer extends javax.swing.JInternalFrame {
     private void custAddBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_custAddBtnMouseClicked
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
-        String ps = "cOCOROLOCO22";
+        String ps = "hola123";
         
         try {
 
@@ -434,7 +434,7 @@ public class Customer extends javax.swing.JInternalFrame {
         {
             String url = "jdbc:mysql://localhost:3306/trafy_inventory";
             String user = "root";
-            String ps = "cOCOROLOCO22";
+            String ps = "hola123";
             try {
                 Con = DriverManager.getConnection(url, user, ps);
                 Statement Add = Con.createStatement();
@@ -461,7 +461,7 @@ public class Customer extends javax.swing.JInternalFrame {
         {
             String url = "jdbc:mysql://localhost:3306/trafy_inventory";
             String user = "root";
-            String ps = "cOCOROLOCO22";
+            String ps = "hola123";
             try {
                 Con = DriverManager.getConnection(url, user, ps);
                 Statement Add = Con.createStatement();
@@ -489,7 +489,7 @@ public class Customer extends javax.swing.JInternalFrame {
         custQty.setText(model.getValueAt (row, 2).toString());
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
-        String ps = "cOCOROLOCO22";
+        String ps = "hola123";
         try{
             Con = DriverManager.getConnection(url, user, ps);
             St = Con.createStatement();

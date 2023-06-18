@@ -58,7 +58,7 @@ public class Orders extends javax.swing.JInternalFrame {
     {
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
-        String ps = "cOCOROLOCO22";
+        String ps = "hola123";
         try {
             Con = DriverManager.getConnection(url, user, ps);
             St = Con.createStatement();
@@ -72,7 +72,7 @@ public class Orders extends javax.swing.JInternalFrame {
     {
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
-        String ps = "cOCOROLOCO22";
+        String ps = "hola123";
         try {
             Con = DriverManager.getConnection(url, user, ps);
             St = Con.createStatement();
@@ -88,7 +88,7 @@ public class Orders extends javax.swing.JInternalFrame {
        
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
-        String ps = "cOCOROLOCO22";
+        String ps = "hola123";
         try {
             Con = DriverManager.getConnection(url, user, ps);
             Statement Add = Con.createStatement();
@@ -588,7 +588,7 @@ public class Orders extends javax.swing.JInternalFrame {
     private void addoOrderBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addoOrderBtnMouseClicked
         String url = "jdbc:mysql://localhost:3306/trafy_inventory";
         String user = "root";
-        String ps = "cOCOROLOCO22";
+        String ps = "hola123";
         if (billId.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(this, "Ingresa el ID de la factura");
