@@ -448,11 +448,8 @@ public class Products extends javax.swing.JInternalFrame {
     
     public void updateProdTable()
     {
-        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-        String user = "root";
-        String ps = "REDACTED_PASSWORD";
         try {
-            Con = DriverManager.getConnection(url, user, ps);
+            Con = DatabaseConfig.getConnection();
             St = Con.createStatement();
             Rs = St.executeQuery("select * from products");
             prodTable.setModel(DbUtils.resultSetToTableModel(Rs));
@@ -463,11 +460,8 @@ public class Products extends javax.swing.JInternalFrame {
     
     public void getCategories()
     {
-        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-        String user = "root";
-        String ps = "REDACTED_PASSWORD";
         try {
-            Con = DriverManager.getConnection(url, user, ps);
+            Con = DatabaseConfig.getConnection();
             St = Con.createStatement();
             Rs = St.executeQuery("select * from category");
             while(Rs.next())
@@ -482,17 +476,13 @@ public class Products extends javax.swing.JInternalFrame {
     
     //AGREGAR
     private void addBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtnMouseClicked
-        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-        String user = "root";
-        String ps = "REDACTED_PASSWORD";
             
         try {
             
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection Con = DriverManager.getConnection(url, user, ps);
+            Connection Con = DatabaseConfig.getConnection();
             System.out.print("Conexion exitosa");
             
-            //Con = DriverManager.getConnection("jdbc:derby://localhost:1527/InventoryDB","Luis","REDACTED_PASSWORD");
             String sql = "Insert into products (id, name, quantity, description, category)" + "values (?, ?, ?, ?, ?)";
             PreparedStatement add = Con.prepareStatement(sql);
             add.setInt(1, Integer.valueOf(prodId.getText()));
@@ -521,11 +511,8 @@ public class Products extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Seleccione un producto");
         else
         {
-            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-            String user = "root";
-            String ps = "REDACTED_PASSWORD";
             try {
-                Con = DriverManager.getConnection(url, user, ps);
+                Con = DatabaseConfig.getConnection();
                 Statement Add = Con.createStatement();
                 Rs = Add.executeQuery("select * from products where id="+prodId.getText());
                 if(Rs.next())
@@ -558,11 +545,8 @@ public class Products extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Falta Información");
         else
         {
-            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-            String user = "root";
-            String ps = "REDACTED_PASSWORD";
             try {
-                Con = DriverManager.getConnection(url, user, ps);
+                Con = DatabaseConfig.getConnection();
                 Statement Add = Con.createStatement();
                 Rs = Add.executeQuery("select * from products where id="+prodId.getText());
                 if(Rs.next())
@@ -612,3 +596,4 @@ public class Products extends javax.swing.JInternalFrame {
     private javax.swing.JTable prodTable;
     // End of variables declaration//GEN-END:variables
 }
+

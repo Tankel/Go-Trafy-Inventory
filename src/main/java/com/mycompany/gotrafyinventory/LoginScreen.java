@@ -269,11 +269,8 @@ public class LoginScreen extends javax.swing.JFrame {
         else
         {
         String query = "select * from users where USERNAME='"+userName.getText()+"' and PASSWORD='"+userPassword.getText()+"'";
-        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-        String user = "root";
-        String ps = "REDACTED_PASSWORD";
         try{
-            Con = DriverManager.getConnection(url, user, ps);
+            Con = DatabaseConfig.getConnection();
             St = Con.createStatement();
             Rs = St.executeQuery(query);
             if(Rs.next()){
@@ -308,3 +305,4 @@ public class LoginScreen extends javax.swing.JFrame {
     private javax.swing.JPasswordField userPassword;
     // End of variables declaration//GEN-END:variables
 }
+

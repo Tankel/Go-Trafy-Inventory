@@ -286,11 +286,8 @@ public class User extends javax.swing.JInternalFrame {
 
     public void updateUserTable()
     {
-        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-        String user = "root";
-        String ps = "REDACTED_PASSWORD";
         try {
-            Con = DriverManager.getConnection(url, user, ps);
+            Con = DatabaseConfig.getConnection();
             St = Con.createStatement();
             Rs = St.executeQuery("select * from users");
             userTable.setModel(DbUtils.resultSetToTableModel(Rs));
@@ -301,17 +298,13 @@ public class User extends javax.swing.JInternalFrame {
     
     
     private void userAddBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userAddBtnMouseClicked
-        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-        String user = "root";
-        String ps = "REDACTED_PASSWORD";
         
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection Con = DriverManager.getConnection(url, user, ps);
+            Connection Con = DatabaseConfig.getConnection();
             System.out.print("Conexion exitosa");
 
-            //Con = DriverManager.getConnection("jdbc:derby://localhost:1527/InventoryDB","Luis","REDACTED_PASSWORD");
             String sql = "Insert into users (username, password, phone, email)" + "values (?, ?, ?, ?)";
             PreparedStatement add = Con.prepareStatement(sql);
             add.setString(1, userName.getText());
@@ -338,11 +331,8 @@ public class User extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Seleccione un usuario");
         else
         {
-            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-            String user = "root";
-            String ps = "REDACTED_PASSWORD";
             try {
-                Con = DriverManager.getConnection(url, user, ps);
+                Con = DatabaseConfig.getConnection();
                 Statement Add = Con.createStatement();
                 Rs = Add.executeQuery("select * from users where USERNAME='"+userName.getText()+"'");
                 if(Rs.next())
@@ -365,11 +355,8 @@ public class User extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Falta Información");
         else
         {
-            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-            String user = "root";
-            String ps = "REDACTED_PASSWORD";
             try {
-                Con = DriverManager.getConnection(url, user, ps);
+                Con = DatabaseConfig.getConnection();
                 Statement Add = Con.createStatement();
                 Rs = Add.executeQuery("select * from users where USERNAME='"+userName.getText()+"'");
                 if(Rs.next())
@@ -416,3 +403,4 @@ public class User extends javax.swing.JInternalFrame {
     private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 }
+

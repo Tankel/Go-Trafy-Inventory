@@ -56,11 +56,8 @@ public class Orders extends javax.swing.JInternalFrame {
     }
     public void updateProdTable()
     {
-        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-        String user = "root";
-        String ps = "REDACTED_PASSWORD";
         try {
-            Con = DriverManager.getConnection(url, user, ps);
+            Con = DatabaseConfig.getConnection();
             St = Con.createStatement();
             Rs = St.executeQuery("select * from products");
             prodTable.setModel(DbUtils.resultSetToTableModel(Rs));
@@ -70,11 +67,8 @@ public class Orders extends javax.swing.JInternalFrame {
     }
     public void updateCustTable()
     {
-        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-        String user = "root";
-        String ps = "REDACTED_PASSWORD";
         try {
-            Con = DriverManager.getConnection(url, user, ps);
+            Con = DatabaseConfig.getConnection();
             St = Con.createStatement();
             Rs = St.executeQuery("select * from customer");
             custTable.setModel(DbUtils.resultSetToTableModel(Rs));
@@ -86,11 +80,8 @@ public class Orders extends javax.swing.JInternalFrame {
     {
         int newQty = oldQty - Integer.valueOf(prodQty.getText());
        
-        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-        String user = "root";
-        String ps = "REDACTED_PASSWORD";
         try {
-            Con = DriverManager.getConnection(url, user, ps);
+            Con = DatabaseConfig.getConnection();
             Statement Add = Con.createStatement();
             Add.executeUpdate("update products set QUANTITY='"+newQty+"' where ID="+prodId);
             updateProdTable();
@@ -586,9 +577,6 @@ public class Orders extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabelProduct1MouseClicked
 
     private void addoOrderBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addoOrderBtnMouseClicked
-        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-        String user = "root";
-        String ps = "REDACTED_PASSWORD";
         if (billId.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(this, "Ingresa el ID de la factura");
@@ -597,10 +585,9 @@ public class Orders extends javax.swing.JInternalFrame {
         try {
             
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection Con = DriverManager.getConnection(url, user, ps);
+            Connection Con = DatabaseConfig.getConnection();
             System.out.print("Conexion exitosa");
             
-            //Con = DriverManager.getConnection("jdbc:derby://localhost:1527/InventoryDB","Luis","REDACTED_PASSWORD");
             String sql = "Insert into `order` (id, customer_name, date, amount)" + "values (?, ?, ?, ?)";
             PreparedStatement add = Con.prepareStatement(sql);
             add.setInt(1, Integer.valueOf(billId.getText()));
@@ -675,3 +662,4 @@ public class Orders extends javax.swing.JInternalFrame {
     private javax.swing.JLabel totalLabel1;
     // End of variables declaration//GEN-END:variables
 }
+

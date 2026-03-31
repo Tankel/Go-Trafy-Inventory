@@ -380,11 +380,8 @@ public class Customer extends javax.swing.JInternalFrame {
 
     public void updateCustTable()
     {
-        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-        String user = "root";
-        String ps = "REDACTED_PASSWORD";
         try {
-            Con = DriverManager.getConnection(url, user, ps);
+            Con = DatabaseConfig.getConnection();
             St = Con.createStatement();
             Rs = St.executeQuery("select * from customer");
             custTable.setModel(DbUtils.resultSetToTableModel(Rs));
@@ -395,17 +392,13 @@ public class Customer extends javax.swing.JInternalFrame {
     
     //AGREGAR
     private void custAddBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_custAddBtnMouseClicked
-        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-        String user = "root";
-        String ps = "REDACTED_PASSWORD";
         
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection Con = DriverManager.getConnection(url, user, ps);
+            Connection Con = DatabaseConfig.getConnection();
             System.out.print("Conexion exitosa");
 
-            //Con = DriverManager.getConnection("jdbc:derby://localhost:1527/InventoryDB","Luis","REDACTED_PASSWORD");
             String sql = "Insert into customer (id, name, quantity)" + "values (?, ?, ?)";
             PreparedStatement add = Con.prepareStatement(sql);
             add.setInt(1, Integer.valueOf(custId.getText()));
@@ -432,11 +425,8 @@ public class Customer extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Seleccione un cliente");
         else
         {
-            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-            String user = "root";
-            String ps = "REDACTED_PASSWORD";
             try {
-                Con = DriverManager.getConnection(url, user, ps);
+                Con = DatabaseConfig.getConnection();
                 Statement Add = Con.createStatement();
                 Rs = Add.executeQuery("select * from customer where id="+custId.getText());
                 if(Rs.next())
@@ -459,11 +449,8 @@ public class Customer extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Falta Información");
         else
         {
-            String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-            String user = "root";
-            String ps = "REDACTED_PASSWORD";
             try {
-                Con = DriverManager.getConnection(url, user, ps);
+                Con = DatabaseConfig.getConnection();
                 Statement Add = Con.createStatement();
                 Rs = Add.executeQuery("select * from customer where id="+custId.getText());
                 if(Rs.next())
@@ -487,11 +474,8 @@ public class Customer extends javax.swing.JInternalFrame {
         custId.setText(model.getValueAt (row, 0).toString());
         custName.setText(model.getValueAt (row, 1).toString());
         custQty.setText(model.getValueAt (row, 2).toString());
-        String url = "jdbc:mysql://localhost:3306/trafy_inventory";
-        String user = "root";
-        String ps = "REDACTED_PASSWORD";
         try{
-            Con = DriverManager.getConnection(url, user, ps);
+            Con = DatabaseConfig.getConnection();
             St = Con.createStatement();
             Stl = Con.createStatement();
             Rs = St.executeQuery("select count(*) from `order` where customer_name='"+model.getValueAt(row,1).toString()+"'");
@@ -539,3 +523,4 @@ public class Customer extends javax.swing.JInternalFrame {
     private javax.swing.JLabel totalOfOrder;
     // End of variables declaration//GEN-END:variables
 }
+
